@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:id="@+id/application_label_textview"
+        android:layout_width="427dp"
+        android:layout_height="142dp"
+        android:gravity="center"
+        android:text="Application"
+        android:textSize="64sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/fill_app_label_textview"
+        android:layout_width="443dp"
+        android:layout_height="61dp"
+        android:gravity="center"
+        android:text="Please fill out the following"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/application_label_textview" />
+
+    <EditText
+        android:id="@+id/new_username_label_editext"
+        android:layout_width="215dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:hint="enter username"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fill_app_label_textview" />
+
+    <EditText
+        android:id="@+id/new_password_label_editext"
+        android:layout_width="215dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:hint="enter new password"
+        android:inputType="textPassword"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_username_label_editext" />
+
+    <EditText
+        android:id="@+id/enter_class_label_editText"
+        android:layout_width="215dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:gravity="center"
+        android:hint="enter your role"
+        android:inputType="text"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_password_label_editext" />
+
+    <Button
+        android:id="@+id/new_apply_label_button"
+        android:layout_width="match_parent"
+        android:layout_height="126dp"
+        android:layout_margin="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Submit"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_class_label_editText" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

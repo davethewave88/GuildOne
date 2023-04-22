@@ -8,6 +8,6 @@ public abstract class AppDatabase extends RoomDatabase {
     public static final String DB_NAME = "USER_DATABASE";
     public static final String USER_TABLE = "USER_TABLE";
 
-    public abstract GuildDAO getGuildDao();
+    public abstract GuildDAO getGuildDAO();
 
 }

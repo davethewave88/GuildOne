@@ -11,42 +11,63 @@ public class User {
 
     private String mUserName;
     private String mPassword;
+    private String mRole;
+    private int mMoney;
+    private boolean mIsAdmin;
 
-    public User(String userName, String password) {
+    public User(String userName, String password, String role, int money, boolean isAdmin) {
         mUserName = userName;
         mPassword = password;
+        mRole = role;
+        mMoney = 0;
+        mIsAdmin = isAdmin;
     }
 
     public int getUserId() {
         return mUserId;
     }
 
-    public void setUserId(int userId) {
-        mUserId = userId;
+    public void setUserId(int mUserId) {
+        this.mUserId = mUserId;
     }
 
     public String getUserName() {
         return mUserName;
     }
 
-    public void setUserName(String userName) {
-        mUserName = userName;
+    public void setUserName(String mUserName) {
+        this.mUserName = mUserName;
     }
 
     public String getPassword() {
         return mPassword;
     }
 
-    public void setPassword(String password) {
-        mPassword = password;
+    public void setPassword(String mPassword) {
+        this.mPassword = mPassword;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "mUserId=" + mUserId +
-                ", mUserName='" + mUserName + '\'' +
-                ", mPassword='" + mPassword + '\'' +
-                '}';
+    public String getRole() {
+        return mRole;
+    }
+
+    public void setRole(String mRole) {
+        this.mRole = mRole;
+    }
+
+    public int getMoney() {
+        return mMoney;
+    }
+
+    public void setMoney(int mMoney) {
+        this.mMoney = mMoney;
+    }
+
+    public boolean getIsAdmin() {
+        return mIsAdmin;
+    }
+
+    public void setIsAdmin(boolean mIsAdmin) {
+        this.mIsAdmin = mIsAdmin;
     }
 }
