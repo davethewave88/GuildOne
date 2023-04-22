@@ -5,6 +5,7 @@ import androidx.room.Room;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +16,16 @@ import com.example.guild.databinding.ActivityLoginBinding;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private static final String USER_ID_KEY = "com.example.guild.userIdKey";
+    private static final String PREFERENCES_KEY = "com.example.guild.PREFERENCES_KEY";
+
     private EditText mNewUsername_editText;
     private EditText mNewPassword_editText;
     private EditText mNewRole_editText;
     private Button mNewApply_button;
     private ActivityLoginBinding binding;
     private GuildDAO guildDAO;
+    private SharedPreferences preferences = null;
 
     private String username;
     private String password;
@@ -41,6 +46,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getDatabase() {
         guildDAO = Room.databaseBuilder(this, AppDatabase.class,AppDatabase.USER_TABLE)
                 .allowMainThreadQueries()
+                .fallbackToDestructiveMigration()
                 .build()
                 .getGuildDAO();
     }
@@ -66,7 +72,8 @@ public class LoginActivity extends AppCompatActivity {
                     User newUser = new User(username,password,role,0,false);
                     guildDAO.insert(newUser);
                     user = guildDAO.getUserByUsername(username);
-                    Intent intent = MainActivity.getIntent(getApplicationContext(),user.getUserId());
+                    addUserToPreference();
+                    Intent intent = LandingActivity.getIntent(getApplicationContext(),user.getUserId());
                     startActivity(intent);
                 }
             }
@@ -74,6 +81,14 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    private void addUserToPreference(){
+        if(preferences == null){
+            SharedPreferences preferences = this.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
+        }
+        SharedPreferences.Editor editor =preferences.edit();
+        editor.putInt(USER_ID_KEY, user.getUserId());
+        editor.apply();
+    }
     private boolean checkForUserInDatabase() {
         user = guildDAO.getUserByUsername(username);
         if(user == null){
@@ -86,6 +101,7 @@ public class LoginActivity extends AppCompatActivity {
     private void getTextFields() {
         username = mNewUsername_editText.getText().toString();
         password = mNewPassword_editText.getText().toString();
+        role = mNewRole_editText.getText().toString();
     }
 
     public static Intent getIntent(Context context){
