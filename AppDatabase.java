@@ -3,9 +3,9 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 
-@Database(entities = {User.class,Storage.class,Wares.class}, version = 3)
+@Database(entities = {User.class,Storage.class,Wares.class}, version = 4)
 public abstract class AppDatabase extends RoomDatabase {
-    public static final String DB_NAME = "USER_DATABASE";
+
     public static final String USER_TABLE = "USER_TABLE";
 
     public static final String USER_STORAGE = "USER_STORAGE";

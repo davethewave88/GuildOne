@@ -60,4 +60,15 @@ public class Storage {
     public void setArmor_count(int armor_count) {
         this.armor_count = armor_count;
     }
+
+    @Override
+    public String toString() {
+        return "Storage{" +
+                "userId=" + userId +
+                ", potion_count=" + potion_count +
+                ", ration_count=" + ration_count +
+                ", weapon_count=" + weapon_count +
+                ", armor_count=" + armor_count +
+                '}';
+    }
 }

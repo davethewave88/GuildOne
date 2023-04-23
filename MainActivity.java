@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkForUser() {
         userId = getIntent().getIntExtra(USER_ID_KEY,-1);
+        Log.d(TAG, "checkForUser: " + guildDAO.getAllUsers().toString());
         if(userId != -1){
             return;
         }
@@ -65,12 +66,13 @@ public class MainActivity extends AppCompatActivity {
             User defaultUser = new User("testuser1","testuser1","beginner",0,false);
             User adminUser = new User("admin2","admin2","guildmaster",1000000,true);
             guildDAO.insert(defaultUser,adminUser);
+            Log.d(TAG, "checkForUsers: " + guildDAO.getAllUsers().toString() );
         }
 
     }
 
     private void getDatabase() {
-        guildDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.DB_NAME)
+        guildDAO = Room.databaseBuilder(this, AppDatabase.class, AppDatabase.USER_TABLE)
                 .allowMainThreadQueries()
                 .fallbackToDestructiveMigration()
                 .build()
@@ -107,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "onClick: user id = " + user.getUserId());
                     Intent intent = LandingActivity.getIntent(getApplicationContext(),user.getUserId());
                     startActivity(intent);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "Incorrect password", Toast.LENGTH_SHORT).show();
                 }
             }
         });

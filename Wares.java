@@ -11,8 +11,7 @@ public class Wares {
     private String desc;
     private int price;
 
-    public Wares(int itemId, String name, String desc, int price) {
-        this.itemId = itemId;
+    public Wares(String name, String desc, int price) {
         this.name = name;
         this.desc = desc;
         this.price = price;

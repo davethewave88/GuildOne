@@ -1,5 +1,7 @@
 package com.example.guild;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -7,6 +9,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,9 +40,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        wireupDisplay();
         getDatabase();
+        wireupDisplay();
+
 
     }
 
@@ -72,7 +75,11 @@ public class LoginActivity extends AppCompatActivity {
                     User newUser = new User(username,password,role,0,false);
                     guildDAO.insert(newUser);
                     user = guildDAO.getUserByUsername(username);
+                    Log.d(TAG, "onClick: new user: " + user.toString());
+                    Log.d(TAG, "onClick: users: " + guildDAO.getAllUsers().toString());
                     addUserToPreference();
+                    Log.d(TAG, "onClick: new user: " + user.toString());
+                    Log.d(TAG, "onClick: users: " + guildDAO.getAllUsers().toString());
                     Intent intent = LandingActivity.getIntent(getApplicationContext(),user.getUserId());
                     startActivity(intent);
                 }
@@ -83,16 +90,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private void addUserToPreference(){
         if(preferences == null){
-            SharedPreferences preferences = this.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
+            preferences = this.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
         }
-        SharedPreferences.Editor editor =preferences.edit();
+        SharedPreferences.Editor editor = preferences.edit();
         editor.putInt(USER_ID_KEY, user.getUserId());
         editor.apply();
     }
     private boolean checkForUserInDatabase() {
         user = guildDAO.getUserByUsername(username);
         if(user == null){
-            Toast.makeText(this, "no user " + username + " found", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "no user " + username + " found", Toast.LENGTH_SHORT).show();
             return false;
         }
         return true;

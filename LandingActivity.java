@@ -2,6 +2,7 @@ package com.example.guild;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import androidx.annotation.LongDef;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
@@ -45,9 +46,7 @@ public class LandingActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("USER_ID_KEY",-1);
         preferences = this.getSharedPreferences(PREFERENCES_KEY,Context.MODE_PRIVATE);
         //int id = preferences.getInt(USER_ID_KEY,-1);
-        Log.d(TAG, "onCreate: id from pref: " + id);
-        user = guildDAO.getUserByUserId(id);
-        Log.d(TAG, "onCreate: id from dao: " + user.getUserId());
+
         wireupDisplay();
     }
 
@@ -65,25 +64,34 @@ public class LandingActivity extends AppCompatActivity {
         displayUser = binding.usernameTextview;
         displayRank = binding.rankTextview;
         logout_button = binding.logoutLabelButton;
-
+        int id = getIntent().getIntExtra("USER_ID_KEY",-1);
+        user = guildDAO.getUserByUserId(id);
+        Log.d(TAG, "wireupDisplay: id " + guildDAO.getUserByUserId(id));
+        Log.d(TAG, "wireupDisplay: user: " + user);
         displayUser.setText(user.getUserName());
         displayRank.setText(user.getRole());
+
+        admin_button = binding.adminButton;
         if(user.getIsAdmin()){
             admin_button.setVisibility(View.VISIBLE);
         }
 
+        wallet_button = binding.walletLabelButton;
         wallet_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = BankActivity.getIntent(getApplicationContext(),user.getUserId());
+                startActivity(intent);
 
             }
         });
 
+        shop_button = binding.shopLabelButton;
         shop_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = ShopActivity.getIntent(getApplicationContext(),user.getUserId());
+                startActivity(intent);
 
             }
         });
@@ -99,7 +107,7 @@ public class LandingActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = AdminActivity.getIntent(getApplicationContext(),user.getUserId());
-
+                startActivity(intent);
             }
         });
 
@@ -130,6 +138,8 @@ public class LandingActivity extends AppCompatActivity {
 
                     }
                 });
+
+        alertBuilder.create().show();
 
     }
 

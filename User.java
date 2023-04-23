@@ -19,7 +19,7 @@ public class User {
         mUserName = userName;
         mPassword = password;
         mRole = role;
-        mMoney = 0;
+        mMoney = money;
         mIsAdmin = isAdmin;
     }
 
@@ -76,7 +76,6 @@ public class User {
         return "User{" +
                 "mUserId=" + mUserId +
                 ", mUserName='" + mUserName + '\'' +
-                ", mPassword='" + mPassword + '\'' +
                 ", mRole='" + mRole + '\'' +
                 ", mMoney=" + mMoney +
                 '}';

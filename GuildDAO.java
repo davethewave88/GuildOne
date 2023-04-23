@@ -60,4 +60,7 @@ public interface GuildDAO {
     @Query("SELECT * FROM " + AppDatabase.GUILD_WARES)
     List<Wares> getAllWares();
 
+    @Query("SELECT * FROM " + AppDatabase.GUILD_WARES + " WHERE name = :search")
+    Wares getWareByName(String search);
+
 }
